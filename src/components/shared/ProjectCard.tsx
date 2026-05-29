@@ -65,6 +65,7 @@ const ProjectCard = ({ project }: { project: IProject }) => {
               src={getImageUrl(thumbnail)}
               alt={title}
               fill
+              unoptimized={thumbnail.startsWith("data:")}
               className="object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-[1deg]"
             />
           ) : (

@@ -75,6 +75,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               src={getImageUrl(thumbnail)}
               alt={title}
               fill
+              unoptimized={thumbnail.startsWith("data:")}
               className="object-cover"
               priority
             />

@@ -4,8 +4,8 @@ import { fetchWithTag } from "@/lib/fetchWithTag";
 
 const Projects = async () => {
   try {
-    const url = `/project`;
-    const result = await fetchWithTag<IProject | IProject[]>(url, { tag: "project" });
+    const url = `/project?status=published`;
+    const result = await fetchWithTag<IProject | IProject[]>(url, { revalidate: 0 });
 
     // Normalize data to always be an array
     let projects: IProject[] = [];

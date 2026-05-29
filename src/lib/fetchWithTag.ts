@@ -6,6 +6,7 @@ export interface FetchOptions {
   tag?: string;
   isFormData?: boolean;
   headers?: Record<string, string>;
+  revalidate?: number | false;
 }
 
 export interface ResponsePayload<T> {
@@ -38,11 +39,18 @@ export async function fetchWithTag<T>(
     tag,
     isFormData = false,
     headers = {},
+    revalidate,
   }: FetchOptions = {}
 ): Promise<ResponsePayload<T>> {
-  const fetchOptions: RequestInit & { next?: { tags?: string[] } } = {
+  // Build next cache options
+  const nextOpts: { tags?: string[]; revalidate?: number | false } = {};
+  if (tag) nextOpts.tags = [tag];
+  if (revalidate !== undefined) nextOpts.revalidate = revalidate;
+  const hasNextOpts = Object.keys(nextOpts).length > 0;
+
+  const fetchOptions: RequestInit & { next?: typeof nextOpts } = {
     method,
-    next: tag ? { tags: [tag] } : undefined,
+    next: hasNextOpts ? nextOpts : undefined,
     credentials: "include",
     headers: isFormData
       ? headers
