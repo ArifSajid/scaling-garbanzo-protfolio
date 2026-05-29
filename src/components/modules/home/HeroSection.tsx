@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { easeInOut, motion } from "framer-motion";
 import { gsap } from "gsap";
-import { Github, Linkedin, Star } from "lucide-react";
+import { Github, Linkedin, Star, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
@@ -152,6 +152,28 @@ const HeroSection = () => {
                   </Button>
                 </motion.div>
               ))}
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 + socialIcons.length * 0.15 }}
+                whileHover={{ scale: 1.05, y: -4 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  asChild
+                  className="h-12 px-6 rounded-full bg-[var(--color-primary)] text-white hover:opacity-90 hover:shadow-lg hover:shadow-[var(--color-primary)]/40 transition-all duration-300 flex gap-2 items-center"
+                >
+                  <a
+                    href="https://drive.google.com/file/d/1pPtH8BBfJI182o7GDIwfuuQUuwpIrJzD/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Download className="h-4 w-4" />
+                    Download CV
+                  </a>
+                </Button>
+              </motion.div>
             </div>
           </motion.div>
 
